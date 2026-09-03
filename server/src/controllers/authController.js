@@ -114,7 +114,7 @@ const loginDoctor = async (req,res) => {
                 token : gentoken(user._id)
             })
         }
-         else  res.status(400).json({message : "invaliddetails"})
+         else  res.status(400).json({message : "invalid details"})
     } catch (error) {
           res.status(400).json({message : "invalid email or password"})
     }

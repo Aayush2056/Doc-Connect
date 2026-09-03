@@ -90,8 +90,8 @@ const getMyAppointments = async (req, res) => {
     const appointments = await Appointment.find({
       user: req.user._id,
     })
-      .populate("doctor", "-password")
-      .sort({ date: 1 });
+      .populate("doctor", "_id name")
+    .sort({ date: 1 });
 
     res.status(200).json(appointments);
   } catch (error) {
@@ -106,7 +106,7 @@ const getMyAppointments = async (req, res) => {
 const getDoctorAppointments = async (req, res) => {
   try {
     const appointments = await Appointment.find({
-      doctor: req.doctor._id,
+      doctor: req.user._id,
     })
       .populate("user", "-password")
       .sort({ date: 1 });
@@ -132,6 +132,12 @@ const updateAppointmentStatus = async (req, res) => {
         message: "Appointment not found",
       });
     }
+    // Check whether logged-in doctor owns this appointment
+    if (appointment.doctor.toString() !== req.user.id.toString()) {
+      return res.status(403).json({
+        message: "Only the assigned doctor can update appointment status",
+      });
+    }
 
     appointment.status = status;
 
@@ -147,7 +153,6 @@ const updateAppointmentStatus = async (req, res) => {
     });
   }
 };
-
 
 export { bookAppointment, getMyAppointments, getDoctorAppointments, updateAppointmentStatus,
 };

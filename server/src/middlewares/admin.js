@@ -1,6 +1,6 @@
 const admin =(req,res,next)=>{
-     
-    if(req.User && req.User.role ==="admin"){
+     console.log(req.user.role);
+    if(req.user && req.user.role ==="admin"){
         next();
     }
     else{
