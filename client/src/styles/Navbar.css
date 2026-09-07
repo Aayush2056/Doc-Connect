@@ -1,0 +1,394 @@
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  width: 100%;
+  height: 78px;
+  padding: 0 6%;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #eeeaf5;
+
+  position: relative;
+  z-index: 1000;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+  text-decoration: none;
+
+  color: #5b3cc4;
+
+  font-size: 23px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* =========================
+   NAVIGATION LINKS
+========================= */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-links a {
+  text-decoration: none;
+
+  color: #55515c;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #5b3cc4;
+}
+
+
+/* =========================
+   AUTH SECTION
+========================= */
+
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+/* =========================
+   SIGN UP
+========================= */
+
+.signup-btn {
+  text-decoration: none;
+
+  color: #5b3cc4;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  padding: 10px 17px;
+
+  border-radius: 10px;
+
+  transition: all 0.2s ease;
+}
+
+.signup-btn:hover {
+  background: #f4f0ff;
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-btn {
+  text-decoration: none;
+
+  background: #5b3cc4;
+  color: white;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  padding: 11px 19px;
+
+  border-radius: 10px;
+
+  transition: all 0.2s ease;
+}
+
+.login-btn:hover {
+  background: #4b2eae;
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+.profile-wrapper {
+  position: relative;
+}
+
+
+/* =========================
+   USER GREETING
+========================= */
+
+.user-greeting {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 6px 12px 6px 6px;
+
+  background: #f4f0ff;
+
+  border: 1px solid #e6defb;
+
+  border-radius: 30px;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  transition: all 0.2s ease;
+}
+
+.user-greeting:hover {
+  background: #eee8ff;
+
+  border-color: #d8cdf7;
+}
+
+
+/* =========================
+   USER AVATAR
+========================= */
+
+.user-avatar {
+  width: 35px;
+  height: 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #5b3cc4;
+
+  color: white;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   USER NAME
+========================= */
+
+.user-name {
+  color: #3b287f;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+/* =========================
+   DROPDOWN ARROW
+========================= */
+
+.dropdown-arrow {
+  color: #5b3cc4;
+
+  font-size: 10px;
+
+  margin-left: 3px;
+}
+
+
+/* =========================
+   PROFILE DROPDOWN
+========================= */
+
+.profile-dropdown {
+  position: absolute;
+
+  top: calc(100% + 10px);
+
+  right: 0;
+
+  width: 150px;
+
+  padding: 7px;
+
+  background: #ffffff;
+
+  border: 1px solid #eeeaf5;
+
+  border-radius: 13px;
+
+  box-shadow: 0 12px 35px rgba(40, 25, 80, 0.14);
+
+  animation: dropdown 0.15s ease;
+}
+
+
+/* Dropdown Animation */
+
+@keyframes dropdown {
+
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =========================
+   LOGOUT BUTTON
+========================= */
+
+.logout-btn {
+  width: 100%;
+
+  padding: 11px 12px;
+
+  border: none;
+
+  background: transparent;
+
+  border-radius: 9px;
+
+  color: #333;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #f4f0ff;
+
+  color: #5b3cc4;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+  .navbar {
+    padding: 0 4%;
+  }
+
+  .nav-links {
+    gap: 18px;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+  .navbar {
+    height: auto;
+    min-height: 70px;
+
+    padding: 15px 20px;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .nav-links {
+    order: 3;
+
+    width: 100%;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    padding-top: 5px;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+  }
+
+  .user-name {
+    display: none;
+  }
+
+  .user-greeting {
+    padding: 5px;
+  }
+
+  .dropdown-arrow {
+    display: none;
+  }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 450px) {
+
+  .nav-links {
+    gap: 12px;
+    overflow-x: auto;
+  }
+
+  .nav-links a {
+    white-space: nowrap;
+    font-size: 12px;
+  }
+
+  .signup-btn {
+    padding: 8px 10px;
+  }
+
+  .login-btn {
+    padding: 9px 13px;
+  }
+
+}

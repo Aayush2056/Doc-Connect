@@ -9,16 +9,34 @@ const gentoken =(id)=>{
 
 const registerDoctor = async (req, res) => {
   try {
-    const { name,  email,password, specialization,experience, phone,fees, availability, } = req.body;
-    const image = req.file;
-
-    // Cloudinary par upload
-    const result = await cloudinary.uploader.upload(image.path);
+    const {
+      name,
+      email,
+      password,
+      specialization,
+      experience,
+      phone,
+      fees,
+      availability,
+    } = req.body;
 
     // Check required fields
-    if (!name || !email || !password || !specialization || !fees) {
+    if (
+      !name ||
+      !email ||
+      !password ||
+      !specialization ||
+      !fees
+    ) {
       return res.status(400).json({
         message: "Please provide all required fields",
+      });
+    }
+
+    // Check image
+    if (!req.file) {
+      return res.status(400).json({
+        message: "Doctor image is required",
       });
     }
 
@@ -31,6 +49,16 @@ const registerDoctor = async (req, res) => {
       });
     }
 
+    // Parse availability
+    const parsedAvailability = availability
+      ? JSON.parse(availability)
+      : [];
+
+    // Upload image to Cloudinary
+    const result = await cloudinary.uploader.upload(
+      req.file.path
+    );
+
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 5);
 
@@ -40,19 +68,22 @@ const registerDoctor = async (req, res) => {
       email,
       password: hashedPassword,
       specialization,
-      experience,
+      experience: Number(experience) || 0,
       phone,
-      fees,
-      availability,
-      image : result.secure_url
+      fees: Number(fees),
+      availability: parsedAvailability,
+      image: result.secure_url,
     });
 
     res.status(201).json({
       message: "Doctor registered successfully",
-      doctor: doctor,
-      token : gentoken(doctor)
+      doctor,
+      token: gentoken(doctor),
     });
+
   } catch (error) {
+    console.log("Doctor Register Error:", error);
+
     res.status(500).json({
       message: error.message,
     });

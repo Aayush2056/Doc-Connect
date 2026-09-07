@@ -1,0 +1,272 @@
+/* =========================
+   AUTH PAGE
+========================= */
+
+.auth-page {
+  min-height: calc(100vh - 80px);
+  background: #faf8f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+}
+
+
+/* =========================
+   AUTH CARD
+========================= */
+
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  padding: 42px;
+  border-radius: 24px;
+  box-shadow: 0 15px 45px rgba(40, 25, 80, 0.1);
+  border: 1px solid #eeeaf8;
+}
+
+.auth-card.doctor-card {
+  max-width: 600px;
+}
+
+
+/* =========================
+   HEADING
+========================= */
+
+.auth-card h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: #202018;
+  text-align: center;
+}
+
+.auth-card > p {
+  margin: 10px 0 28px;
+  text-align: center;
+  color: #77736f;
+  font-size: 15px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-card input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 52px;
+  padding: 0 16px;
+  border: 1px solid #ddd9e8;
+  border-radius: 12px;
+  outline: none;
+  font-size: 15px;
+  color: #202018;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+
+.auth-card input::placeholder {
+  color: #aaa6a3;
+}
+
+.auth-card input:focus {
+  border-color: #5b3cc4;
+  box-shadow: 0 0 0 3px rgba(91, 60, 196, 0.1);
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.auth-card button {
+  height: 52px;
+  border: none;
+  border-radius: 12px;
+  background: #5b3cc4;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: all 0.25s ease;
+}
+
+.auth-card button:hover {
+  background: #4b2eae;
+  transform: translateY(-1px);
+}
+
+.auth-card button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* =========================
+   LINKS
+========================= */
+
+.auth-card a {
+  color: #5b3cc4;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-card a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================
+   DOCTOR FORM
+========================= */
+
+.doctor-card form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.doctor-card form input {
+  width: 100%;
+}
+
+.doctor-card form button {
+  grid-column: 1 / -1;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+  .auth-page {
+    padding: 30px 15px;
+  }
+
+  .auth-card {
+    padding: 30px 22px;
+    border-radius: 20px;
+  }
+
+  .auth-card h1 {
+    font-size: 27px;
+  }
+
+  .doctor-card form {
+    grid-template-columns: 1fr;
+  }
+
+  .doctor-card form button {
+    grid-column: auto;
+  }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+  .auth-card {
+    padding: 25px 18px;
+  }
+
+  .auth-card h1 {
+    font-size: 24px;
+  }
+
+  .auth-card input,
+  .auth-card button {
+    height: 49px;
+  }
+}
+.availability-section {
+  grid-column: 1 / -1;
+  margin-top: 10px;
+}
+
+.availability-section h3 {
+  margin: 0 0 15px;
+  color: #202018;
+  font-size: 18px;
+}
+
+.availability-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 25px 1fr;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.day-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+}
+
+.availability-row input {
+  width: 100%;
+}
+
+.availability-row span {
+  text-align: center;
+  color: #777;
+  font-size: 14px;
+}
+
+.auth-footer {
+  margin-top: 22px !important;
+  margin-bottom: 0 !important;
+}
+
+@media (max-width: 650px) {
+  .availability-section {
+    grid-column: auto;
+  }
+
+  .availability-row {
+    grid-template-columns: 80px 1fr;
+  }
+
+  .availability-row span {
+    display: none;
+  }
+}
+.file-input {
+  height: 52px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  border: 1px solid #ddd9e8;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  color: #aaa6a3;
+  font-size: 15px;
+  cursor: pointer;
+  background: #fff;
+}
+
+.file-input input {
+  display: none;
+}
+
+.file-input:hover {
+  border-color: #5b3cc4;
+}

@@ -1,6 +1,7 @@
 import express from "express"
 import dotenv from "dotenv"
 dotenv.config()
+import cors from "cors"
 import connectdb from "./src/db/connectdb.js"
 import authRoutes from "./src/routes/authRoutes.js"
 import appointRoutes from "./src/routes/appointmentRoutes.js"
@@ -9,6 +10,7 @@ import paymentRoutes from "./src/routes/paymentRoutes.js"
 const app = express()
 const PORT = process.env.PORT
 
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
