@@ -1,0 +1,95 @@
+.doctors-page {
+  min-height: 100vh;
+  padding: 60px 7%;
+  background: #f8fafc;
+}
+
+/* Header */
+
+.doctors-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 50px;
+}
+
+.doctors-header span {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #2563eb;
+}
+
+.doctors-header h1 {
+  margin: 12px 0 15px;
+  font-size: 42px;
+  line-height: 1.2;
+  color: #1f2937;
+}
+
+.doctors-header h1 strong {
+  color: #2563eb;
+}
+
+.doctors-header p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #6b7280;
+}
+
+
+/* Doctors Grid */
+
+.doctors-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(280px, 1fr)
+  );
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+/* Status */
+
+.doctors-status {
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.doctors-status h2 {
+  color: #555;
+}
+
+
+/* No doctors */
+
+.no-doctors {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px;
+}
+
+.no-doctors h2 {
+  color: #555;
+}
+
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  .doctors-page {
+    padding: 40px 20px;
+  }
+
+  .doctors-header h1 {
+    font-size: 32px;
+  }
+
+  .doctors-grid {
+    grid-template-columns: 1fr;
+  }
+}

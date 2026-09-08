@@ -1,53 +1,45 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext,useContext,useEffect,useState,} from "react";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-
     const userInfo = localStorage.getItem("userInfo");
-         console.log(userInfo);
-    if (userInfo && userInfo !== "undefined") {
 
+    if (userInfo && userInfo !== "undefined") {
       try {
-        setUser(JSON.parse(userInfo));
+        const parsedUser = JSON.parse(userInfo);
+
+        // Normal user object
+        setUser(parsedUser.user || parsedUser);
       } catch (error) {
         console.log("Invalid userInfo:", error);
+
         localStorage.removeItem("userInfo");
+        localStorage.removeItem("token");
       }
-
     }
-
   }, []);
 
- const login = (data) => {
+  const login = (data) => {
     console.log("AUTH LOGIN DATA:", data);
 
-    // Backend se data flat aa raha hai, isliye token alag karein aur baaki sab user data banega
-    const { token, ...userData } = data;
+    // data.user ko state me save karo
+    setUser(data.user);
 
-    setUser(userData);
-    
+    // Sirf actual user object save karo
     localStorage.setItem(
       "userInfo",
-      JSON.stringify(userData)
+      JSON.stringify(data.user)
     );
 
-    if (token) {
-      localStorage.setItem(
-        "token",
-        token
-      );
-    }
+    localStorage.setItem("token", data.token);
   };
 
   const logout = () => {
-
     setUser(null);
-
     localStorage.removeItem("userInfo");
     localStorage.removeItem("token");
   };

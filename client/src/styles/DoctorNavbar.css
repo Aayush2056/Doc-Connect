@@ -1,0 +1,253 @@
+.doctor-navbar {
+  width: 100%;
+  height: 78px;
+  padding: 0 6%;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #eeeaf5;
+
+  position: relative;
+  z-index: 1000;
+}
+
+
+/* Logo */
+
+.doctor-logo {
+  text-decoration: none;
+
+  color: #5b3cc4;
+
+  font-size: 23px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* Links */
+
+.doctor-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.doctor-nav-links a {
+  text-decoration: none;
+
+  color: #55515c;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: color 0.2s ease;
+}
+
+.doctor-nav-links a:hover {
+  color: #5b3cc4;
+}
+
+
+/* Profile */
+
+.doctor-nav-auth {
+  display: flex;
+  align-items: center;
+}
+
+.doctor-profile-wrapper {
+  position: relative;
+}
+
+.doctor-user-greeting {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 6px 12px 6px 6px;
+
+  background: #f4f0ff;
+
+  border: 1px solid #e6defb;
+
+  border-radius: 30px;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  transition: all 0.2s ease;
+}
+
+.doctor-user-greeting:hover {
+  background: #eee8ff;
+  border-color: #d8cdf7;
+}
+
+
+/* Avatar */
+
+.doctor-avatar {
+  width: 35px;
+  height: 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #5b3cc4;
+
+  color: white;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+/* Name */
+
+.doctor-user-name {
+  color: #3b287f;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.doctor-arrow {
+  color: #5b3cc4;
+
+  font-size: 10px;
+
+  margin-left: 3px;
+}
+
+
+/* Dropdown */
+
+.doctor-profile-dropdown {
+  position: absolute;
+
+  top: calc(100% + 10px);
+  right: 0;
+
+  width: 150px;
+
+  padding: 7px;
+
+  background: white;
+
+  border: 1px solid #eeeaf5;
+
+  border-radius: 13px;
+
+  box-shadow:
+    0 12px 35px rgba(40, 25, 80, 0.14);
+
+  animation: doctorDropdown 0.15s ease;
+}
+
+@keyframes doctorDropdown {
+
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Logout */
+
+.doctor-logout-btn {
+  width: 100%;
+
+  padding: 11px 12px;
+
+  border: none;
+
+  background: transparent;
+
+  border-radius: 9px;
+
+  color: #333;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.doctor-logout-btn:hover {
+  background: #f4f0ff;
+  color: #5b3cc4;
+}
+
+
+/* Responsive */
+
+@media (max-width: 700px) {
+
+  .doctor-navbar {
+    height: auto;
+
+    min-height: 70px;
+
+    padding: 15px 20px;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+  }
+
+  .doctor-logo {
+    font-size: 20px;
+  }
+
+  .doctor-nav-links {
+    order: 3;
+
+    width: 100%;
+
+    justify-content: center;
+
+    gap: 25px;
+
+    padding-top: 5px;
+  }
+
+  .doctor-nav-links a {
+    font-size: 13px;
+  }
+
+  .doctor-user-name {
+    display: none;
+  }
+
+  .doctor-user-greeting {
+    padding: 5px;
+  }
+
+  .doctor-arrow {
+    display: none;
+  }
+}

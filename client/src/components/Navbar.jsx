@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../styles/Navbar.css";
 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
 
-  const [showDropdown, setShowDropdown] = useState(false);
-
+   const [showDropdown, setShowDropdown] = useState(false);
+   const navigate = useNavigate();
   const handleLogout = () => {
     logout();
     setShowDropdown(false);
+   
   };
 
   return (
@@ -25,10 +26,10 @@ const Navbar = () => {
         {/* Navigation Links */}
         <div className="nav-links">
           <Link to="/">Home</Link>
-          <Link to="/doctors">Doctors</Link>
+          <Link to="/list">Doctors</Link>
           <Link to="/appointments">Appointments</Link>
           <Link to="/about">About</Link>
-          <Link to="/contact">Contact</Link>
+        {user?.role==="admin" ? <Link to="/admin">Admin</Link> :    <Link to="/contact">Contact</Link>}
         </div>
 
         {/* Authentication */}

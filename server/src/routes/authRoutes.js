@@ -12,5 +12,5 @@ router.post("/register",registerUser)
 router.post("/login",loginUser)
 
 router.post("/doc/register",upload.single('image'), registerDoctor)
-router.post("/doc/login",docProtect,loginDoctor)
+router.post("/doc/login",loginDoctor)
 export default router

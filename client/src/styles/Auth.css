@@ -270,3 +270,33 @@
 .file-input:hover {
   border-color: #5b3cc4;
 }
+.login-type {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.login-type-btn {
+  flex: 1;
+  height: 45px !important;
+  margin-top: 0 !important;
+  background: #f4f0ff !important;
+  color: #5b3cc4 !important;
+  border: 1px solid #e6defb !important;
+  font-size: 14px !important;
+  transform: none !important;
+}
+
+.login-type-btn.active {
+  background: #5b3cc4 !important;
+  color: white !important;
+}
+
+.login-type-btn:hover {
+  transform: none !important;
+  background: #eee8ff !important;
+}
+
+.login-type-btn.active:hover {
+  background: #4b2eae !important;
+}
