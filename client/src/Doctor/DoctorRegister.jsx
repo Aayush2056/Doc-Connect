@@ -1,11 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/Auth.css";
+import "../styles/DoctorRegister.css";
 
 const DoctorRegister = () => {
   const navigate = useNavigate();
-const [image, setImage] = useState(null);
+
+  const [image, setImage] = useState(null);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -71,62 +73,65 @@ const [image, setImage] = useState(null);
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    const dataToSend = new FormData();
+      const dataToSend = new FormData();
 
-    dataToSend.append("name", formData.name);
-    dataToSend.append("email", formData.email);
-    dataToSend.append("password", formData.password);
-    dataToSend.append("specialization", formData.specialization);
-    dataToSend.append("experience", formData.experience);
-    dataToSend.append("phone", formData.phone);
-    dataToSend.append("fees", formData.fees);
+      dataToSend.append("name", formData.name);
+      dataToSend.append("email", formData.email);
+      dataToSend.append("password", formData.password);
+      dataToSend.append("specialization", formData.specialization);
+      dataToSend.append("experience", formData.experience);
+      dataToSend.append("phone", formData.phone);
+      dataToSend.append("fees", formData.fees);
 
-    dataToSend.append(
-      "availability",
-      JSON.stringify(availability)
-    );
+      dataToSend.append(
+        "availability",
+        JSON.stringify(availability)
+      );
 
-    dataToSend.append("image", image);
+      dataToSend.append("image", image);
 
-    const response = await axios.post(
-      "http://localhost:3000/api/auth/doc/register",
-      dataToSend
-    );
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/doc/register",
+        dataToSend
+      );
 
-    console.log("Doctor Registration:", response.data);
+      console.log("Doctor Registration:", response.data);
 
-    alert("Doctor registered successfully!");
+      alert("Doctor registered successfully!");
 
-    navigate("/login");
+      navigate("/login");
+    } catch (error) {
+      console.log("Doctor Registration Error:", error);
 
-  } catch (error) {
-    console.log("Doctor Registration Error:", error);
-
-    alert(
-      error.response?.data?.message ||
-      "Doctor registration failed"
-    );
-
-  } finally {
-    setLoading(false);
-  }
-};
+      alert(
+        error.response?.data?.message ||
+          "Doctor registration failed"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="auth-page">
+    <div className="doctor-register-page">
 
-      <div className="auth-card doctor-card">
+      <div className="doctor-register-card">
 
         <h1>Doctor Registration</h1>
 
         <p>Create your doctor account</p>
 
-        <form onSubmit={handleSubmit}>
+        <form
+          className="doctor-register-form"
+          onSubmit={handleSubmit}
+        >
+
+          {/* Name */}
 
           <input
             type="text"
@@ -137,6 +142,8 @@ const [image, setImage] = useState(null);
             required
           />
 
+          {/* Email */}
+
           <input
             type="email"
             name="email"
@@ -145,6 +152,8 @@ const [image, setImage] = useState(null);
             onChange={handleChange}
             required
           />
+
+          {/* Password */}
 
           <input
             type="password"
@@ -155,6 +164,8 @@ const [image, setImage] = useState(null);
             required
           />
 
+          {/* Specialization */}
+
           <input
             type="text"
             name="specialization"
@@ -163,6 +174,8 @@ const [image, setImage] = useState(null);
             onChange={handleChange}
             required
           />
+
+          {/* Experience */}
 
           <input
             type="number"
@@ -173,6 +186,8 @@ const [image, setImage] = useState(null);
             min="0"
           />
 
+          {/* Phone */}
+
           <input
             type="text"
             name="phone"
@@ -180,6 +195,8 @@ const [image, setImage] = useState(null);
             value={formData.phone}
             onChange={handleChange}
           />
+
+          {/* Fees */}
 
           <input
             type="number"
@@ -191,31 +208,40 @@ const [image, setImage] = useState(null);
             required
           />
 
-      <label className="file-input">
-  <span>Doctor Image</span>
+          {/* Doctor Image */}
 
-  <input
-    type="file"
-    name="image"
-    accept="image/*"
-    onChange={(e) => setImage(e.target.files[0])}
-    required
-  />
-</label>
+          <label className="doctor-file-input">
+
+            <span>
+              {image ? image.name : "Doctor Image"}
+            </span>
+
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={(e) =>
+                setImage(e.target.files[0])
+              }
+              required
+            />
+
+          </label>
 
           {/* Availability */}
 
-          <div className="availability-section">
+          <div className="doctor-availability">
 
             <h3>Availability</h3>
 
             {availability.map((item, index) => (
+
               <div
-                className="availability-row"
+                className="doctor-availability-row"
                 key={item.day}
               >
 
-                <div className="day-name">
+                <div className="doctor-day">
                   {item.day}
                 </div>
 
@@ -246,19 +272,32 @@ const [image, setImage] = useState(null);
                 />
 
               </div>
+
             ))}
 
           </div>
 
-          <button type="submit" disabled={loading}>
-            {loading ? "Registering..." : "Register as Doctor"}
+          {/* Submit */}
+
+          <button
+            type="submit"
+            className="doctor-register-btn"
+            disabled={loading}
+          >
+            {loading
+              ? "Registering..."
+              : "Register as Doctor"}
           </button>
 
         </form>
 
-        <p className="auth-footer">
+        {/* Footer */}
+
+        <p className="doctor-register-footer">
           Already have an account?{" "}
-          <Link to="/login">Login</Link>
+          <Link to="/login">
+            Login
+          </Link>
         </p>
 
       </div>

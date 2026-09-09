@@ -7,23 +7,69 @@ const gentoken =(id)=>{
       return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:'7d'})
 }
 
+
 const registerDoctor = async (req, res) => {
   try {
-    const { name,  email,password, specialization,experience, phone,fees, availability, } = req.body;
+    const {
+      name,
+      email,
+      password,
+      specialization,
+      experience,
+      phone,
+      fees,
+    } = req.body;
+
     const image = req.file;
 
-    // Cloudinary par upload
-    const result = await cloudinary.uploader.upload(image.path);
+    // =========================
+    // CHECK REQUIRED FIELDS
+    // =========================
 
-    // Check required fields
-    if (!name || !email || !password || !specialization || !fees) {
+    if (
+      !name ||
+      !email ||
+      !password ||
+      !specialization ||
+      !fees ||
+      !image
+    ) {
       return res.status(400).json({
         message: "Please provide all required fields",
       });
     }
 
-    // Check if doctor already exists
-    const existingDoctor = await Doctor.findOne({ email });
+    // =========================
+    // PARSE AVAILABILITY
+    // =========================
+
+    let parsedAvailability = [];
+
+    if (req.body.availability) {
+      try {
+        parsedAvailability = JSON.parse(req.body.availability);
+      } catch (error) {
+        return res.status(400).json({
+          message: "Invalid availability format",
+        });
+      }
+    }
+
+    // =========================
+    // UPLOAD IMAGE TO CLOUDINARY
+    // =========================
+
+    const result = await cloudinary.uploader.upload(
+      image.path
+    );
+
+    // =========================
+    // CHECK EXISTING DOCTOR
+    // =========================
+
+    const existingDoctor = await Doctor.findOne({
+      email,
+    });
 
     if (existingDoctor) {
       return res.status(400).json({
@@ -31,10 +77,19 @@ const registerDoctor = async (req, res) => {
       });
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 5);
+    // =========================
+    // HASH PASSWORD
+    // =========================
 
-    // Create doctor
+    const hashedPassword = await bcrypt.hash(
+      password,
+      5
+    );
+
+    // =========================
+    // CREATE DOCTOR
+    // =========================
+
     const doctor = await Doctor.create({
       name,
       email,
@@ -43,21 +98,29 @@ const registerDoctor = async (req, res) => {
       experience,
       phone,
       fees,
-      availability,
-      image : result.secure_url
+      availability: parsedAvailability,
+      image: result.secure_url,
     });
+
+    // =========================
+    // RESPONSE
+    // =========================
 
     res.status(201).json({
       message: "Doctor registered successfully",
-      doctor: doctor,
-      token : gentoken(doctor)
+      doctor,
+      token: gentoken(doctor),
     });
   } catch (error) {
+    console.log("DOCTOR REGISTER ERROR:", error);
+
     res.status(500).json({
       message: error.message,
     });
   }
 };
+
+
 
 const registerUser = async(req,res)=>{
           const {name , email , password,role} = req.body
@@ -94,8 +157,9 @@ const loginUser = async (req, res) => {
           name: user.name,
           email: user.email,
           role: user.role,
+           token: gentoken(user._id),
         },
-        token: gentoken(user._id),
+       
       });
     } else {
       res.status(400).json({

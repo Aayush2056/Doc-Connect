@@ -1,0 +1,124 @@
+.appointments-page {
+  min-height: calc(100vh - 78px);
+  background: #f8f7fc;
+  padding: 50px 6%;
+  box-sizing: border-box;
+}
+
+.appointments-container {
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+/* Each appointment card */
+.appointments-container > div:not(.appointments-header):not(.no-appointments) {
+  background: #ffffff;
+  border: 1px solid #e9e5f2;
+  border-radius: 18px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 25px rgba(60, 40, 100, 0.08);
+
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  column-gap: 25px;
+
+  transition: 0.25s ease;
+}
+
+.appointments-container > div:not(.appointments-header):not(.no-appointments):hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(60, 40, 100, 0.12);
+}
+
+/* Doctor image */
+.doctor-image {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 15px;
+  grid-row: span 2;
+  border: 1px solid #eeeaf5;
+}
+
+/* Doctor name */
+.appointments-container h2 {
+  margin: 0 0 8px;
+  color: #292044;
+  font-size: 21px;
+  font-weight: 650;
+}
+
+/* Details */
+.appointments-container p {
+  margin: 7px 0;
+  color: #686273;
+  font-size: 14px;
+}
+
+.appointments-container p strong {
+  color: #292044;
+}
+
+/* Separator */
+.appointments-container hr {
+  grid-column: 1 / -1;
+  width: 100%;
+  border: none;
+  border-top: 1px solid #eeeaf5;
+  margin: 18px 0 0;
+}
+
+/* Heading */
+.appointments-header {
+  margin-bottom: 30px;
+}
+
+.appointments-header h1 {
+  margin: 0 0 8px;
+  color: #292044;
+  font-size: 32px;
+}
+
+.appointments-header p {
+  margin: 0;
+  color: #77717f;
+  font-size: 15px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .appointments-page {
+    padding: 30px 18px;
+  }
+
+  .appointments-container > div:not(.appointments-header):not(.no-appointments) {
+    display: block;
+    padding: 20px;
+  }
+
+  .doctor-image {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 15px;
+  }
+
+  .appointments-header h1 {
+    font-size: 27px;
+  }
+}
+.payment-btn {
+  margin-top: 15px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 8px;
+  background: #5b3cc4;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.payment-btn:hover {
+  background: #4b2eae;
+}

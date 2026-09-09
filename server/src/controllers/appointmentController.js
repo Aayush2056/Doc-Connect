@@ -90,8 +90,12 @@ const getMyAppointments = async (req, res) => {
     const appointments = await Appointment.find({
       user: req.user._id,
     })
-      .populate("doctor", "_id name")
+      .populate("doctor", "_id name  specialization image fees")
     .sort({ date: 1 });
+       console.log(
+      "APPOINTMENTS COUNT:",
+      appointments.length
+    );
 
     res.status(200).json(appointments);
   } catch (error) {

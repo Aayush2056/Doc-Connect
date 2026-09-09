@@ -2,36 +2,39 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import DoctorCard from "../components/DoctorCard.jsx";
 import "../styles/Doctors.css";
-
+import { useAuth } from "../context/AuthContext.jsx";
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+     const {user} = useAuth();
+useEffect(() => {
+  const fetchDoctors = async () => {
+    console.log("USER:", user);
+console.log("TOKEN:", user?.token);
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/api/admin/doctors",
+        {
+          headers : {
+            Authorization : `Bearer ${user.token}`
+          }
+        }
+      );
 
-  useEffect(() => {
-    const fetchDoctors = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/api/admin/doctors"
-        );
+      console.log("DOCTORS:", response.data);
+      setDoctors(response.data);
 
-        console.log("DOCTORS:", response.data);
+    } catch (error) {
+      console.log("STATUS:", error.response?.status);
+      console.log("DATA:", error.response?.data);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        setDoctors(response.data);
-      } catch (error) {
-        console.log("FETCH DOCTORS ERROR:", error);
-
-        setError(
-          error.response?.data?.message ||
-          "Failed to fetch doctors"
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchDoctors();
-  }, []);
+  fetchDoctors();
+}, [user]);
 
   if (loading) {
     return (

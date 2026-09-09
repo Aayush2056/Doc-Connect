@@ -19,8 +19,6 @@ const DoctorCard = ({ doctor }) => {
         <img
           src={doctor.image}
           alt={doctor.name}
-             onLoad={() => console.log("IMAGE LOADED")}
-  onError={(e) => console.log("IMAGE ERROR:", e)}
         />
       </div>
 

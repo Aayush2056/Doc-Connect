@@ -8,7 +8,9 @@ import Navbar from "./components/Navbar.jsx";
 import Home from "./pages/Home.jsx";
 import DoctorHome from "./Doctor/DoctorHome.jsx";
 import DoctorNavbar from "./Doctor/DoctorNavbar.jsx";
-
+import DoctorDetails from "./Doctor/DoctorDetails.jsx";
+import BookAppointment from "./Doctor/BookAppointment.jsx";
+import Appointments from "./pages/Appointments.jsx";
 const App = () => {
   const router = createBrowserRouter([
     // ================= USER HOME =================
@@ -24,6 +26,18 @@ const App = () => {
           path: "/list",
           element: <Doctors />,
         },
+        {
+    path: "/doctors/:doctorId",
+    element: <DoctorDetails />,
+  },
+     {
+    path: "/doctors/:doctorId/book",
+    element: <BookAppointment />,
+  },
+   {
+    path: "/appointments",
+    element: <Appointments />,
+  },
       ],
     },
 
