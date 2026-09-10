@@ -1,68 +1,68 @@
 .doctor-card {
-  width: 300px;
   background: white;
   border: 1px solid #e5e7eb;
-  border-radius: 16px;
+  border-radius: 14px;
   overflow: hidden;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: 0.2s;
 }
 
 .doctor-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 .doctor-card-image {
   width: 100%;
   height: 240px;
-  background: #f3f4f6;
-  overflow: hidden;
-}
-
-.doctor-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  background: #f1f5f9;
 }
 
 .doctor-card-content {
-  padding: 20px;
+  padding: 18px;
 }
 
 .doctor-card-content h3 {
-  margin: 0 0 8px;
-  font-size: 21px;
-  color: #1f2937;
+  margin: 0;
+  font-size: 19px;
+  color: #172033;
 }
 
-.doctor-specialization {
-  margin: 0 0 18px;
-  color: #2563eb;
-  font-size: 15px;
-  font-weight: 500;
+.doctor-card-content p {
+  margin: 7px 0 15px;
+  color: #4f46e5;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.doctor-card-info {
+.doctor-info {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  color: #555;
+  padding: 12px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  color: #64748b;
   font-size: 14px;
 }
 
-.doctor-profile-btn {
+.doctor-card-content button {
   width: 100%;
+  margin-top: 15px;
   padding: 11px;
+
   border: none;
   border-radius: 8px;
-  background: #2563eb;
+
+  background: #4f46e5;
   color: white;
-  font-size: 15px;
+
+  font-weight: 600;
   cursor: pointer;
 }
 
-.doctor-profile-btn:hover {
-  background: #1d4ed8;
+.doctor-card-content button:hover {
+  background: #4338ca;
 }

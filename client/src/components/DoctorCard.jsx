@@ -4,45 +4,28 @@ import "../styles/DoctorCard.css";
 const DoctorCard = ({ doctor }) => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate(`/doctors/${doctor._id}`);
-  };
-    console.log(doctor.image);
   return (
     <div
-    
       className="doctor-card"
-      onClick={handleClick}
+      onClick={() => navigate(`/doctors/${doctor._id}`)}
     >
-      {/* Doctor Image */}
-      <div className="doctor-card-image">
-        <img
-          src={doctor.image}
-          alt={doctor.name}
-        />
-      </div>
+      <img
+        src={doctor.image}
+        alt={doctor.name}
+        className="doctor-card-image"
+      />
 
-      {/* Doctor Details */}
       <div className="doctor-card-content">
-
         <h3>Dr. {doctor.name}</h3>
 
-        <p className="doctor-specialization">
-          {doctor.specialization}
-        </p>
+        <p>{doctor.specialization}</p>
 
-        <div className="doctor-card-info">
-          <span>
-            {doctor.experience} Years Experience
-          </span>
-
-          <span>
-            ₹{doctor.fees}
-          </span>
+        <div className="doctor-info">
+          <span>{doctor.experience} Years</span>
+          <span>₹{doctor.fees}</span>
         </div>
 
         <button
-          className="doctor-profile-btn"
           onClick={(e) => {
             e.stopPropagation();
             navigate(`/doctors/${doctor._id}`);
@@ -50,10 +33,8 @@ const DoctorCard = ({ doctor }) => {
         >
           View Profile →
         </button>
-
       </div>
     </div>
-
   );
 };
 

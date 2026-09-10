@@ -49,10 +49,32 @@ const createPaymentOrder = async (req, res) => {
 
 const verifyPayment = async (req, res) => {
   try {
-    const {   razorpay_order_id,  razorpay_payment_id,razorpay_signature, appointmentId,} = req.body;
+    const {
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature,
+      appointmentId,
+    } = req.body;
+   console.log("ORDER ID:", razorpay_order_id);
+    console.log("PAYMENT ID:", razorpay_payment_id);
+    console.log("SIGNATURE:", razorpay_signature);
+    console.log("APPOINTMENT ID:", appointmentId);
+    // 1. Check required data
+    if (
+      !razorpay_order_id ||
+      !razorpay_payment_id ||
+      !razorpay_signature ||
+      !appointmentId
+    ) {
+      return res.status(400).json({
+        message: "Payment details are missing",
+      });
+    }
 
-    // 1. Find appointment
-    const appointment = await Appointment.findById(appointmentId);
+    // 2. Find appointment
+    const appointment = await Appointment.findById(
+      appointmentId
+    );
 
     if (!appointment) {
       return res.status(404).json({
@@ -60,25 +82,38 @@ const verifyPayment = async (req, res) => {
       });
     }
 
-    // 2. Create signature
+    // 3. Generate signature
     const generatedSignature = crypto
-      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+      .createHmac(
+        "sha256",
+        process.env.RAZORPAY_KEY_SECRET
+      )
       .update(
-        razorpay_order_id + "|" + razorpay_payment_id
+        razorpay_order_id +
+          "|" +
+          razorpay_payment_id
       )
       .digest("hex");
 
-    // 3. Compare signatures
-    if (generatedSignature !== razorpay_signature) {
+    console.log("ORDER ID:", razorpay_order_id);
+    console.log("PAYMENT ID:", razorpay_payment_id);
+    console.log("RAZORPAY SIGNATURE:", razorpay_signature);
+    console.log(
+      "GENERATED SIGNATURE:",
+      generatedSignature
+    );
+
+    // 4. Compare signatures
+    if (
+      generatedSignature !== razorpay_signature
+    ) {
       return res.status(400).json({
         message: "Invalid payment signature",
       });
     }
 
-    // 4. Payment verified
+    // 5. Payment verified
     appointment.paymentStatus = "paid";
-
-    // Optional: save payment ID
     appointment.paymentId = razorpay_payment_id;
 
     await appointment.save();
@@ -89,12 +124,13 @@ const verifyPayment = async (req, res) => {
     });
 
   } catch (error) {
+    console.log("VERIFY PAYMENT ERROR:", error);
+
     res.status(500).json({
       message: error.message,
     });
   }
 };
-
 
 export {
   createPaymentOrder,

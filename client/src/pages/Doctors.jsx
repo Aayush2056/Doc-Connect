@@ -2,91 +2,79 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import DoctorCard from "../components/DoctorCard.jsx";
 import "../styles/Doctors.css";
-import { useAuth } from "../context/AuthContext.jsx";
+import {useAuth} from "../context/AuthContext.jsx"
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-     const {user} = useAuth();
-useEffect(() => {
-  const fetchDoctors = async () => {
-    console.log("USER:", user);
-console.log("TOKEN:", user?.token);
-    try {
-      const response = await axios.get(
-        "http://localhost:3000/api/admin/doctors",
-        {
-          headers : {
-            Authorization : `Bearer ${user.token}`
+    const {user} = useAuth();
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get(
+          "http://localhost:3000/api/admin/doctors",
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
           }
-        }
-      );
+        );
 
-      console.log("DOCTORS:", response.data);
-      setDoctors(response.data);
+        setDoctors(response.data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    } catch (error) {
-      console.log("STATUS:", error.response?.status);
-      console.log("DATA:", error.response?.data);
-    } finally {
-      setLoading(false);
-    }
-  };
+    fetchDoctors();
+  }, [user]);
 
-  fetchDoctors();
-}, [user]);
+  const filteredDoctors = doctors.filter((doctor) =>
+    doctor.specialization
+      ?.toLowerCase()
+      .includes(search.toLowerCase())
+  );
 
   if (loading) {
-    return (
-      <div className="doctors-status">
-        <h2>Loading doctors...</h2>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="doctors-status">
-        <h2>{error}</h2>
-      </div>
-    );
+    return <h2 className="doctors-loading">Loading...</h2>;
   }
 
   return (
     <main className="doctors-page">
 
-      <section className="doctors-header">
-        <span>OUR DOCTORS</span>
+      <div className="doctors-top">
+        <h1>Find a Doctor</h1>
 
-        <h1>
-          Find the right doctor
-          <br />
-          <strong>for your care.</strong>
-        </h1>
+        <div className="doctor-search">
+          <span>🔍</span>
 
-        <p>
-          Browse our experienced doctors and choose
-          the right specialist for your healthcare needs.
-        </p>
-      </section>
+          <input
+            type="text"
+            placeholder="Search by specialization..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+      </div>
 
-
-      <section className="doctors-grid">
-
-        {doctors.length > 0 ? (
-          doctors.map((doctor) => (
+      <div className="doctors-grid">
+        {filteredDoctors.length > 0 ? (
+          filteredDoctors.map((doctor) => (
             <DoctorCard
               key={doctor._id}
               doctor={doctor}
             />
           ))
         ) : (
-          <div className="no-doctors">
-            <h2>No doctors found</h2>
-          </div>
+          <p className="no-doctors">
+            No doctors found
+          </p>
         )}
-
-      </section>
+      </div>
 
     </main>
   );

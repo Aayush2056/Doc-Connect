@@ -157,6 +157,46 @@ const updateAppointmentStatus = async (req, res) => {
     });
   }
 };
+const cancelAppointment = async (req, res) => {
+  try {
+    const appointment = await Appointment.findById(req.params.id);
 
-export { bookAppointment, getMyAppointments, getDoctorAppointments, updateAppointmentStatus,
+    if (!appointment) {
+      return res.status(404).json({
+        message: "Appointment not found",
+      });
+    }
+
+    // Check appointment belongs to logged-in user
+    if (
+      appointment.user.toString() !==
+      req.user._id.toString()
+    ) {
+      return res.status(403).json({
+        message: "You can cancel only your own appointment",
+      });
+    }
+
+    // Paid appointment cannot be cancelled
+    if (appointment.paymentStatus === "paid") {
+      return res.status(400).json({
+        message: "Paid appointment cannot be cancelled",
+      });
+    }
+
+    // Delete appointment from database
+    await Appointment.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+      message: "Appointment cancelled successfully",
+    });
+  } catch (error) {
+    console.log("CANCEL APPOINTMENT ERROR:", error);
+
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+export { bookAppointment, getMyAppointments, getDoctorAppointments, updateAppointmentStatus,cancelAppointment
 };

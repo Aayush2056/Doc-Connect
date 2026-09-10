@@ -13,7 +13,6 @@ const DoctorNavbar = () => {
     setShowDropdown(false);
     navigate("/login")
   };
-console.log("DOCTOR NAV USER:", user);
   return (
     <>
       <nav className="doctor-navbar">

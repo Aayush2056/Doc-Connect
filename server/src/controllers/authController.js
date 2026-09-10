@@ -22,9 +22,6 @@ const registerDoctor = async (req, res) => {
 
     const image = req.file;
 
-    // =========================
-    // CHECK REQUIRED FIELDS
-    // =========================
 
     if (
       !name ||
@@ -39,9 +36,7 @@ const registerDoctor = async (req, res) => {
       });
     }
 
-    // =========================
-    // PARSE AVAILABILITY
-    // =========================
+   
 
     let parsedAvailability = [];
 
@@ -55,17 +50,11 @@ const registerDoctor = async (req, res) => {
       }
     }
 
-    // =========================
-    // UPLOAD IMAGE TO CLOUDINARY
-    // =========================
-
     const result = await cloudinary.uploader.upload(
       image.path
     );
 
-    // =========================
-    // CHECK EXISTING DOCTOR
-    // =========================
+   
 
     const existingDoctor = await Doctor.findOne({
       email,
@@ -77,18 +66,13 @@ const registerDoctor = async (req, res) => {
       });
     }
 
-    // =========================
-    // HASH PASSWORD
-    // =========================
+  
 
     const hashedPassword = await bcrypt.hash(
       password,
       5
     );
 
-    // =========================
-    // CREATE DOCTOR
-    // =========================
 
     const doctor = await Doctor.create({
       name,

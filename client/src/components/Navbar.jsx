@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../styles/Navbar.css";
 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
 
-   const [showDropdown, setShowDropdown] = useState(false);
-   const navigate = useNavigate();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     logout();
     setShowDropdown(false);
-   
   };
 
   return (
@@ -25,11 +25,19 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <div className="nav-links">
-          <Link to="/">Home</Link>
-          <Link to="/list">Doctors</Link>
-          <Link to="/appointments">Appointments</Link>
-          <Link to="/about">About</Link>
-        {user?.role==="admin" ? <Link to="/admin">Admin</Link> :    <Link to="/contact">Contact</Link>}
+          <NavLink to="/">Home</NavLink>
+
+          <NavLink to="/list">Doctors</NavLink>
+
+          <NavLink to="/appointments">Appointments</NavLink>
+
+          <NavLink to="/about">About</NavLink>
+
+          {user?.role === "admin" ? (
+            <NavLink to="/admin">Admin</NavLink>
+          ) : (
+            <NavLink to="/contact">Contact</NavLink>
+          )}
         </div>
 
         {/* Authentication */}

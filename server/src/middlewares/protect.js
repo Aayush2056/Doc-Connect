@@ -36,18 +36,49 @@ const protect = async (req, res, next) => {
     });
   }
 };
-const docProtect = async (req,res,next) => {
-      let token;
-       if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
-                  try {
-                    token = req.headers.authorization.split(' ')[1]
-                    const decoded = await JWT.verify(token,process.env.JWT_SECRET)
-                        req.user = await Doctor.findById(decoded.id).select("-password");
-                        next()
-                     } catch (error) {
-                    res.status(400).json({message:" invalid token"})
-                  }
-       }
-    
-}
+const docProtect = async (req, res, next) => {
+  let token;
+
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    try {
+      token = req.headers.authorization.split(" ")[1];
+
+      const decoded = JWT.verify(
+        token,
+        process.env.JWT_SECRET
+      );
+
+      console.log("DECODED:", decoded);
+
+      const doctor = await Doctor.findById(decoded.id).select(
+        "-password"
+      );
+
+      console.log("DOCTOR:", doctor);
+
+      if (!doctor) {
+        return res.status(401).json({
+          message: "Doctor not found",
+        });
+      }
+
+      req.user = doctor;
+
+      next();
+    } catch (error) {
+      console.log("DOC PROTECT ERROR:", error);
+
+      return res.status(400).json({
+        message: "Invalid token",
+      });
+    }
+  } else {
+    return res.status(401).json({
+      message: "No token provided",
+    });
+  }
+};
 export { protect, docProtect}

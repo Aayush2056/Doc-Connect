@@ -11,6 +11,8 @@ import DoctorNavbar from "./Doctor/DoctorNavbar.jsx";
 import DoctorDetails from "./Doctor/DoctorDetails.jsx";
 import BookAppointment from "./Doctor/BookAppointment.jsx";
 import Appointments from "./pages/Appointments.jsx";
+import DoctorAppointments from "./Doctor/DoctorAppointments.jsx";
+import About from "./pages/About.jsx";
 const App = () => {
   const router = createBrowserRouter([
     // ================= USER HOME =================
@@ -22,22 +24,26 @@ const App = () => {
           index: true,
           element: <Home />,
         },
-          {
+        {
           path: "/list",
           element: <Doctors />,
         },
         {
-    path: "/doctors/:doctorId",
-    element: <DoctorDetails />,
-  },
-     {
-    path: "/doctors/:doctorId/book",
-    element: <BookAppointment />,
-  },
-   {
-    path: "/appointments",
-    element: <Appointments />,
-  },
+          path: "/doctors/:doctorId",
+          element: <DoctorDetails />,
+        },
+        {
+          path: "/doctors/:doctorId/book",
+          element: <BookAppointment />,
+        },
+        {
+          path: "/appointments",
+          element: <Appointments />,
+        },
+         {
+          path: "about",
+          element: <About />,
+        },
       ],
     },
 
@@ -64,7 +70,14 @@ const App = () => {
           index: true,
           element: <DoctorHome />,
         },
-       
+        {
+          path: "appointments",
+          element: <DoctorAppointments />,
+        },
+        {
+          path: "about",
+          element: <About />,
+        },
       ],
     },
   ]);
