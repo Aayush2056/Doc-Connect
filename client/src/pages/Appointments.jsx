@@ -249,7 +249,7 @@ const Appointments = () => {
         <h1>My Appointments</h1>
 
         {appointments.length === 0 ? (
-          <p>No appointments found.</p>
+          <p>You have not booked any Appointmens yet.</p>
         ) : (
           appointments.map((appointment) => (
             <div

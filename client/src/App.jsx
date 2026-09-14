@@ -13,9 +13,9 @@ import BookAppointment from "./Doctor/BookAppointment.jsx";
 import Appointments from "./pages/Appointments.jsx";
 import DoctorAppointments from "./Doctor/DoctorAppointments.jsx";
 import About from "./pages/About.jsx";
+import AdminPage from "./admin/AdminPage.jsx";
 const App = () => {
   const router = createBrowserRouter([
-    // ================= USER HOME =================
     {
       path: "/",
       element: <Navbar />,
@@ -43,6 +43,10 @@ const App = () => {
          {
           path: "about",
           element: <About />,
+        },
+        {
+          path: "admin",
+          element: <AdminPage />,
         },
       ],
     },
