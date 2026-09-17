@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <main className="home">
 
@@ -27,7 +29,7 @@ const Home = () => {
           </p>
 
           <div className="hero-buttons">
-            <a href="/doctors" className="primary-btn">
+            <a  href="/list" className="primary-btn">
               Find a Doctor
               <span>→</span>
             </a>

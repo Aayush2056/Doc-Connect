@@ -1,0 +1,167 @@
+.contact-page {
+  min-height: calc(100vh - 78px);
+  padding: 55px 6%;
+  background: #faf9fd;
+  box-sizing: border-box;
+}
+
+.contact-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Header */
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.contact-header h1 {
+  margin: 0;
+  color: #292333;
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.contact-header p {
+  max-width: 600px;
+  margin: 12px auto 0;
+  color: #77717f;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+/* Cards */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e8e3f2;
+  border-radius: 15px;
+  transition: all 0.2s ease;
+}
+
+.contact-card:hover {
+  border-color: #5b3cc4;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(40, 25, 80, 0.08);
+}
+
+
+/* Icon */
+
+.contact-icon {
+  width: 55px;
+  height: 55px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f4f0ff;
+  border-radius: 13px;
+
+  font-size: 25px;
+}
+
+
+/* Content */
+
+.contact-card h3 {
+  margin: 0 0 6px;
+  color: #332b43;
+  font-size: 17px;
+}
+
+.contact-card p {
+  margin: 0 0 8px;
+  color: #77717f;
+  font-size: 13px;
+}
+
+.contact-card a {
+  color: #5b3cc4;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.contact-card a:hover {
+  text-decoration: underline;
+}
+
+
+/* Project */
+
+.project-tech {
+  display: inline-block;
+  padding: 5px 10px;
+
+  background: #f4f0ff;
+  color: #5b3cc4;
+
+  border-radius: 15px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+/* Developer Section */
+
+.developer-section {
+  margin-top: 30px;
+  padding: 30px;
+
+  background: #ffffff;
+  border: 1px solid #e8e3f2;
+  border-radius: 15px;
+}
+
+.developer-section h2 {
+  margin: 0 0 15px;
+  color: #332b43;
+  font-size: 22px;
+}
+
+.developer-section p {
+  margin: 8px 0;
+  color: #77717f;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+  .contact-page {
+    padding: 35px 20px;
+  }
+
+  .contact-header h1 {
+    font-size: 28px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .developer-section {
+    padding: 22px;
+  }
+
+}

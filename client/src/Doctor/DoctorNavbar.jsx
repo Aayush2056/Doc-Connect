@@ -38,6 +38,9 @@ const DoctorNavbar = () => {
           <Link to="/doctor/about">
             About
           </Link>
+           <Link to="/doctor/contact">
+           contact
+          </Link>
 
         </div>
 

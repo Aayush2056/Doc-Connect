@@ -14,6 +14,7 @@ import Appointments from "./pages/Appointments.jsx";
 import DoctorAppointments from "./Doctor/DoctorAppointments.jsx";
 import About from "./pages/About.jsx";
 import AdminPage from "./admin/AdminPage.jsx";
+import Contact from "./pages/Contact.jsx";
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -48,6 +49,10 @@ const App = () => {
           path: "admin",
           element: <AdminPage />,
         },
+        {
+          path: "contact",
+          element: <Contact />,
+        },
       ],
     },
 
@@ -81,6 +86,10 @@ const App = () => {
         {
           path: "about",
           element: <About />,
+        },
+          {
+          path: "contact",
+          element: <Contact />,
         },
       ],
     },
