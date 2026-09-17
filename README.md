@@ -66,7 +66,7 @@ Doctors can register, manage their appointments, and update appointment statuses
 - bcrypt
 - Multer
 - Cloudinary
-- Nodemailer
+
 
 ### Payment
 
