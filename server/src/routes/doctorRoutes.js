@@ -1,5 +1,5 @@
 import express from "express"
-import getDoctorById from "../controllers/userControllers.js";
+import {getDoctorById} from "../controllers/userControllers.js";
  const router = express.Router();
 
 router.get("/:id", getDoctorById);

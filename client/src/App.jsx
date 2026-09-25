@@ -15,6 +15,7 @@ import DoctorAppointments from "./Doctor/DoctorAppointments.jsx";
 import About from "./pages/About.jsx";
 import AdminPage from "./admin/AdminPage.jsx";
 import Contact from "./pages/Contact.jsx";
+import AIChat from "./pages/AIChat.jsx";
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ const App = () => {
         {
           path: "contact",
           element: <Contact />,
+        },
+          {
+          path: "ai",
+          element: <AIChat />,
         },
       ],
     },

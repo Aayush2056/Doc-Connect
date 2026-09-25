@@ -1,74 +1,86 @@
 import Doctor from "../model/doctor.model.js";
 import Appointment from "../model/appointment.model.js";
 
+export const createAppointment = async ({
+  userId,
+  doctorId,
+  date,
+  time,
+}) => {
+
+  if (!doctorId || !date || !time) {
+    throw new Error("Doctor, date and time are required");
+  }
+
+  const doctor = await Doctor.findById(doctorId);
+
+  if (!doctor) {
+    throw new Error("Doctor not found");
+  }
+
+  const appointmentDate = new Date(date);
+
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  const dayName = days[appointmentDate.getDay()];
+
+  const dayAvailability = doctor.availability.find(
+    (item) => item.day === dayName
+  );
+
+  if (!dayAvailability || dayAvailability.slots.length === 0) {
+    throw new Error(`Doctor is not available on ${dayName}`);
+  }
+
+  const isAvailable = dayAvailability.slots.some(
+    (slot) =>
+      time >= slot.startTime &&
+      time < slot.endTime
+  );
+
+  if (!isAvailable) {
+    throw new Error("Selected time is not available");
+  }
+
+  const existingAppointment = await Appointment.findOne({
+    doctor: doctorId,
+    date: appointmentDate,
+    time: time,
+    status: { $ne: "cancelled" },
+  });
+
+  if (existingAppointment) {
+    throw new Error("This time slot is already booked");
+  }
+
+  const appointment = await Appointment.create({
+    user: userId,
+    doctor: doctorId,
+    date: appointmentDate,
+    time,
+  });
+
+  return appointment;
+};
+
 // Book Appointment
-const bookAppointment = async (req, res) => {
+ const bookAppointment = async (req, res) => {
   try {
+
     const { doctorId, date, time } = req.body;
 
-    if (!doctorId || !date || !time) {
-      return res.status(400).json({
-        message: "Doctor, date and time are required",
-      });
-    }
-
-    // Find doctor
-    const doctor = await Doctor.findById(doctorId);
-
-    if (!doctor) {
-      return res.status(404).json({
-        message: "Doctor not found",
-      });
-    }
-
-    // Convert date to day name
-    const appointmentDate = new Date(date);
-
-    const days = [ "Sunday","Monday", "Tuesday", "Wednesday",  "Thursday",  "Friday","Saturday", ];
-
-    const dayName = days[appointmentDate.getDay()];
-
-    // Check doctor's availability for that day
-    const dayAvailability = doctor.availability.find(
-      (item) => item.day === dayName
-    );
-
-    if (!dayAvailability || dayAvailability.slots.length === 0) {
-      return res.status(400).json({
-        message: `Doctor is not available on ${dayName}`,
-      });
-    }
-
-    // Check selected time is inside available slot
-    const isAvailable = dayAvailability.slots.some(
-      (slot) => time >= slot.startTime && time < slot.endTime
-    );
-
-    if (!isAvailable) {
-      return res.status(400).json({
-        message: "Selected time is not available",
-      });
-    }
-
-    // Check double booking
-    const existingAppointment = await Appointment.findOne({
-      doctor: doctorId,
-      date: appointmentDate,
-      time: time,
-      status: { $ne: "cancelled" },
-    });
-
-    if (existingAppointment) {
-      return res.status(400).json({
-        message: "This time slot is already booked",
-      });
-    }
-
-    // Create appointment
-    const appointment = await Appointment.create({
-      user: req.user._id,
-      doctor: doctorId,
-      date: appointmentDate,
+    const appointment = await createAppointment({
+      userId: req.user._id,
+      doctorId,
+      date,
       time,
     });
 
@@ -76,10 +88,13 @@ const bookAppointment = async (req, res) => {
       message: "Appointment booked successfully",
       appointment,
     });
+
   } catch (error) {
-    res.status(500).json({
+
+    res.status(400).json({
       message: error.message,
     });
+
   }
 };
 

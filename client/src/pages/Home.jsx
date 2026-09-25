@@ -34,9 +34,9 @@ const Home = () => {
               <span>→</span>
             </a>
 
-            <a href="/about" className="secondary-btn">
-              Learn More
-            </a>
+          <a href="/ai" className="secondary-btn">
+        AI Health Assistant
+       </a>
           </div>
 
           {/* Small Stats */}

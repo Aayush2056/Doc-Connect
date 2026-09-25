@@ -1,6 +1,7 @@
-import express from "express"
 import dotenv from "dotenv"
 dotenv.config()
+import express from "express"
+
 import cors from "cors"
 import connectdb from "./src/db/connectdb.js"
 import authRoutes from "./src/routes/authRoutes.js"
@@ -8,6 +9,7 @@ import appointRoutes from "./src/routes/appointmentRoutes.js"
 import adminRoutes from "./src/routes/adminRoutes.js"
 import paymentRoutes from "./src/routes/paymentRoutes.js"
 import userRoutes from "./src/routes/doctorRoutes.js"
+import aiRoutes from "./src/routes/aiRoutes.js"
 const app = express()
 const PORT = process.env.PORT
 
@@ -20,6 +22,7 @@ app.use("/api/doctor",userRoutes)
 app.use("/api/appointment",appointRoutes)
 app.use("/api/admin",adminRoutes)
 app.use("/api/payment",paymentRoutes)
+app.use("/api/ai", aiRoutes)
 
 app.listen(PORT,async()=>{
     await connectdb()

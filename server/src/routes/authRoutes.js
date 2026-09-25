@@ -10,7 +10,7 @@ const upload = multer({
 });
 
 router.post("/register",signupLimiter,registerUser)
-router.post("/login",loginLimiter,loginUser)
+router.post("/login",loginUser)
 
 router.post("/doc/register",upload.single('image'), signupLimiter,registerDoctor)
 router.post("/doc/login",loginLimiter,loginDoctor)

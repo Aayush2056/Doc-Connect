@@ -18,5 +18,18 @@ const getDoctorById = async (req, res) => {
       message: "Failed to fetch doctor details",
     });
   }
+}
+// it's helpful for findDoctors by specialization
+const findDoctors = async (specialization) => {
+  const doctors = await Doctor.find({
+    specialization: {
+      $regex: specialization,
+      $options: "i",
+    },
+  }).select(
+    "name specialization experience fees phone image availability"
+  );
+
+  return doctors;
 };
-export default getDoctorById
+export {getDoctorById,findDoctors}
