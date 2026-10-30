@@ -24,6 +24,9 @@ app.use("/api/admin",adminRoutes)
 app.use("/api/payment",paymentRoutes)
 app.use("/api/ai", aiRoutes)
 
+app.get("/", (req, res) => {
+  res.send("Doc Connect Backend is Running Successfully!");
+});
 app.listen(PORT,async()=>{
     await connectdb()
     console.log(`server is running on ${PORT}`);
