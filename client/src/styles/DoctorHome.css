@@ -314,3 +314,13 @@
     height: 270px;
   }
 }
+.doctor-feature-card {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.doctor-feature-card:hover {
+  transform: translateY(-5px);
+}

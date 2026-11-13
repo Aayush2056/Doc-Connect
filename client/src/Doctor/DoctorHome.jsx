@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "../styles/DoctorHome.css";
 
 const DoctorHome = () => {
@@ -26,20 +27,20 @@ const DoctorHome = () => {
 
           <div className="doctor-hero-buttons">
 
-            <a
-              href="/doctor/appointments"
+            <Link
+              to="/doctor/appointments"
               className="doctor-primary-btn"
             >
               View Appointments
               <span>→</span>
-            </a>
+            </Link>
 
-            <a
-              href="/doctor/about"
+            <Link
+              to="/doctor/about"
               className="doctor-secondary-btn"
             >
               About Doc-Connect
-            </a>
+            </Link>
 
           </div>
 
@@ -62,7 +63,6 @@ const DoctorHome = () => {
 
       </section>
 
-
       {/* Features */}
 
       <section className="doctor-features">
@@ -79,61 +79,58 @@ const DoctorHome = () => {
 
         </div>
 
-
         <div className="doctor-feature-cards">
 
-          <div className="doctor-feature-card">
-
+          {/* Appointments */}
+          <Link
+            to="/doctor/appointments"
+            className="doctor-feature-card"
+          >
             <div className="doctor-feature-icon">
               📅
             </div>
 
-            <h3>
-              Appointments
-            </h3>
+            <h3>Appointments</h3>
 
             <p>
               View and manage your upcoming
               patient appointments.
             </p>
+          </Link>
 
-          </div>
-
-
-          <div className="doctor-feature-card highlighted">
-
+          {/* Patient Care */}
+          <Link
+            to="/doctor/appointments"
+            className="doctor-feature-card highlighted"
+          >
             <div className="doctor-feature-icon">
               👨‍⚕️
             </div>
 
-            <h3>
-              Patient Care
-            </h3>
+            <h3>Patient Care</h3>
 
             <p>
               Keep track of your patients and
               provide better healthcare.
             </p>
+          </Link>
 
-          </div>
-
-
-          <div className="doctor-feature-card">
-
+          {/* Availability */}
+          <Link
+            to="/doctor/appointments"
+            className="doctor-feature-card"
+          >
             <div className="doctor-feature-icon">
               🕐
             </div>
 
-            <h3>
-              Availability
-            </h3>
+            <h3>Availability</h3>
 
             <p>
               Manage your available days and
               consultation time slots.
             </p>
-
-          </div>
+          </Link>
 
         </div>
 
