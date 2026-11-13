@@ -551,3 +551,8 @@
     transform-origin: right top;
   }
 }
+.service-card {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}

@@ -1,15 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../styles/Home.css";
 
 const Home = () => {
-  const navigate = useNavigate();
   return (
     <main className="home">
 
       {/* Hero Section */}
       <section className="hero">
 
-        {/* Left Content */}
         <div className="hero-content">
 
           <div className="hero-badge">
@@ -29,14 +27,14 @@ const Home = () => {
           </p>
 
           <div className="hero-buttons">
-            <a  href="/list" className="primary-btn">
+            <Link to="/list" className="primary-btn">
               Find a Doctor
               <span>→</span>
-            </a>
+            </Link>
 
-          <a href="/ai" className="secondary-btn">
-        AI Health Assistant
-       </a>
+            <Link to="/ai" className="secondary-btn">
+              AI Health Assistant
+            </Link>
           </div>
 
           {/* Small Stats */}
@@ -58,7 +56,6 @@ const Home = () => {
             </div>
 
           </div>
-
         </div>
 
         {/* Right Image */}
@@ -73,7 +70,6 @@ const Home = () => {
             />
           </div>
 
-          {/* Floating Card */}
           <div className="appointment-card">
             <div className="card-icon">✓</div>
 
@@ -83,7 +79,6 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Rating */}
           <div className="rating-card">
             <span>★</span>
             <div>
@@ -93,9 +88,7 @@ const Home = () => {
           </div>
 
         </div>
-
       </section>
-
 
       {/* Services Section */}
       <section className="services">
@@ -112,35 +105,37 @@ const Home = () => {
 
         <div className="service-cards">
 
-          <div className="service-card">
+          {/* Find Doctor */}
+          <Link to="/list" className="service-card">
             <div className="service-icon">⚕</div>
             <h3>Find a Doctor</h3>
             <p>
               Find the right specialist according to
               your healthcare needs.
             </p>
-          </div>
+          </Link>
 
-          <div className="service-card highlighted">
+          {/* Book Appointment */}
+          <Link to="/appointments" className="service-card highlighted">
             <div className="service-icon">📅</div>
             <h3>Book Appointment</h3>
             <p>
               Choose your preferred doctor, date and
               available time slot.
             </p>
-          </div>
+          </Link>
 
-          <div className="service-card">
-            <div className="service-icon">💬</div>
-            <h3>Consultation</h3>
+          {/* Contact Us */}
+          <Link to="/contact" className="service-card">
+            <div className="service-icon">📞</div>
+            <h3>Contact Us</h3>
             <p>
-              Get professional healthcare guidance
-              from experienced doctors.
+              Have questions or need assistance?
+              Get in touch with our support team.
             </p>
-          </div>
+          </Link>
 
         </div>
-
       </section>
 
     </main>
