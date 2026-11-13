@@ -12,6 +12,7 @@ Doctors can register, manage their appointments, and update appointment statuses
 
 - User registration and login
 - JWT-based authentication
+- Ai based consultation and find doctors
 - Browse all available doctors
 - Search doctors by specialization
 - View doctor details
