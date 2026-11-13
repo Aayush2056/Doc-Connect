@@ -57,7 +57,7 @@ export const healthConsultation = async (message) => {
   // ===============================
 
   const response = await ai.models.generateContent({
-    model: "gemini-3.8-flash",
+    model: "gemini-4-carbon",
 
     contents,
 
@@ -160,7 +160,7 @@ identify the appropriate specialization and use findDoctors.
     // ===============================
 
     const finalResponse = await ai.models.generateContent({
-      model: "gemini-3.8-flash",
+      model: "gemini-4-carbon",
 
       contents,
 
